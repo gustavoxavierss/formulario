@@ -1,291 +1,798 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Início de Serviço - Premium</title>
-    <style>
-        :root {
-            --gold: #D4AF37;
-            --black: #0a0a0a;
-            --dark-grey: #1a1a1a;
-            --white: #ffffff;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulário de Cadastro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C96D;
+    --gold-dark: #9A7A2E;
+    --black: #0A0A0A;
+    --black-soft: #111111;
+    --black-card: #161616;
+    --black-input: #1E1E1E;
+    --white: #F5F0E8;
+    --white-soft: #E8E0D0;
+    --text-muted: #888;
+  }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body { background-color: var(--black); color: var(--white); padding-bottom: 50px; }
+  body {
+    background-color: var(--black);
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    background-image:
+      radial-gradient(ellipse at top, #1a1500 0%, transparent 60%),
+      radial-gradient(ellipse at bottom right, #120d00 0%, transparent 50%);
+  }
 
-        /* Barra de Urgência */
-        #countdown-bar {
-            background: linear-gradient(90deg, #b8860b, var(--gold));
-            color: black;
-            text-align: center;
-            padding: 12px;
-            font-weight: bold;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            font-size: 0.9rem;
-        }
+  /* HEADER */
+  .header {
+    text-align: center;
+    padding: 40px 20px 20px;
+    position: relative;
+  }
+  .header::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 16px auto 0;
+  }
+  .header-tag {
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 7vw, 44px);
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.1;
+  }
+  .header h1 span { color: var(--gold); }
 
-        .container { max-width: 500px; margin: 20px auto; padding: 20px; }
+  /* COUNTDOWN */
+  .countdown-wrapper {
+    margin: 24px 16px;
+    background: linear-gradient(135deg, #1a1300, #0f0900);
+    border: 1px solid var(--gold-dark);
+    border-radius: 12px;
+    padding: 18px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .countdown-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .vagas-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid var(--gold-dark);
+    border-radius: 20px;
+    padding: 4px 12px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--gold-light);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .vagas-badge .dot {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: pulse 1.5s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+  .countdown-msg {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(16px, 4.5vw, 22px);
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+  .countdown-msg.urgent { color: #FF6B35; }
+  .countdown-timer {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+  }
+  .timer-block {
+    text-align: center;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 8px 12px;
+    min-width: 56px;
+  }
+  .timer-block .num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .timer-block .label {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+  .timer-sep {
+    font-size: 24px;
+    color: var(--gold-dark);
+    align-self: center;
+    padding-bottom: 12px;
+  }
 
-        h2 { color: var(--gold); text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+  /* MAIN CONTAINER */
+  .container { padding: 0 16px 40px; max-width: 600px; margin: 0 auto; }
 
-        .form-group { margin-bottom: 15px; }
+  /* SECTION CARD */
+  .card {
+    background: var(--black-card);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .card-title .icon {
+    width: 32px; height: 32px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
 
-        label { display: block; margin-bottom: 5px; color: var(--gold); font-size: 0.85rem; }
+  /* TIPO SELECTOR */
+  .tipo-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .tipo-btn {
+    padding: 14px 10px;
+    border-radius: 10px;
+    border: 1.5px solid rgba(201,168,76,0.25);
+    background: var(--black-input);
+    color: var(--text-muted);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s;
+    letter-spacing: 0.5px;
+  }
+  .tipo-btn.active {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.1);
+    color: var(--gold-light);
+  }
+  .tipo-btn .tipo-icon { font-size: 20px; display: block; margin-bottom: 4px; }
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            background: var(--dark-grey);
-            border: 1px solid #333;
-            color: white;
-            border-radius: 8px;
-            outline: none;
-        }
+  /* FORM */
+  .form-group { margin-bottom: 16px; }
+  .form-label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold-dark);
+    margin-bottom: 7px;
+    font-weight: 600;
+  }
+  .form-input {
+    width: 100%;
+    background: var(--black-input);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 10px;
+    padding: 13px 15px;
+    color: var(--white);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    -webkit-appearance: none;
+  }
+  .form-input::placeholder { color: #444; }
+  .form-input:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+  }
+  .form-hint {
+    font-size: 10px;
+    color: var(--gold-dark);
+    margin-top: 6px;
+    line-height: 1.5;
+    padding: 8px 10px;
+    background: rgba(201,168,76,0.05);
+    border-left: 2px solid var(--gold-dark);
+    border-radius: 0 6px 6px 0;
+  }
 
-        input:focus { border-color: var(--gold); }
+  /* FILE UPLOAD */
+  .upload-area {
+    border: 1.5px dashed rgba(201,168,76,0.3);
+    border-radius: 12px;
+    padding: 24px 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: rgba(201,168,76,0.02);
+    position: relative;
+  }
+  .upload-area:hover, .upload-area.drag-over {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.06);
+  }
+  .upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+  .upload-icon { font-size: 32px; margin-bottom: 8px; }
+  .upload-text {
+    font-size: 13px;
+    color: var(--white-soft);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .upload-subtext { font-size: 11px; color: var(--text-muted); }
+  .upload-preview {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    font-size: 12px;
+    color: var(--gold-light);
+    text-align: left;
+    gap: 8px;
+    align-items: center;
+  }
 
-        .type-selector {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
+  /* PIX */
+  .pix-card {
+    background: linear-gradient(135deg, #1a1300, #0f0900);
+    border: 1px solid var(--gold-dark);
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .pix-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .pix-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  .pix-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+  .pix-key-box {
+    background: rgba(0,0,0,0.5);
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 12px;
+  }
+  .pix-key-label { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
+  .pix-key-value {
+    font-size: 15px;
+    color: var(--gold-light);
+    word-break: break-all;
+    font-weight: 500;
+  }
+  .btn-copy {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+    border: none;
+    border-radius: 10px;
+    color: var(--black);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s;
+  }
+  .btn-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
+  .btn-copy:active { transform: translateY(0); }
 
-        .type-btn {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid var(--gold);
-            background: transparent;
-            color: var(--gold);
-            cursor: pointer;
-            border-radius: 5px;
-            transition: 0.3s;
-        }
+  /* WHATSAPP BUTTON */
+  .btn-whatsapp {
+    width: 100%;
+    padding: 18px 20px;
+    background: linear-gradient(135deg, #1a5c2a, #25D366);
+    border: none;
+    border-radius: 14px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: all 0.3s;
+    box-shadow: 0 8px 32px rgba(37,211,102,0.2);
+    margin-top: 8px;
+    text-decoration: none;
+  }
+  .btn-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(37,211,102,0.3);
+  }
+  .btn-whatsapp svg { width: 24px; height: 24px; flex-shrink: 0; }
+  .btn-whatsapp-sub { font-size: 10px; font-weight: 400; opacity: 0.85; display: block; letter-spacing: 0.5px; }
 
-        .type-btn.active {
-            background: var(--gold);
-            color: black;
-        }
+  /* DIVIDER */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 20px 0;
+    color: var(--text-muted);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(201,168,76,0.15);
+  }
 
-        /* Seção PIX */
-        .pix-box {
-            background: var(--dark-grey);
-            border: 2px dashed var(--gold);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            margin: 30px 0;
-        }
+  /* TOAST */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--gold);
+    color: var(--black);
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
 
-        .pix-key {
-            background: #000;
-            padding: 10px;
-            display: block;
-            margin: 10px 0;
-            word-break: break-all;
-            font-size: 0.8rem;
-            border: 1px solid #444;
-        }
+  /* FOOTER ORNAMENT */
+  .ornament {
+    text-align: center;
+    padding: 10px 0 20px;
+    color: rgba(201,168,76,0.2);
+    font-size: 22px;
+    letter-spacing: 12px;
+  }
 
-        .btn-copy {
-            background: var(--gold);
-            color: black;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-        }
+  /* SELECT styled */
+  select.form-input { cursor: pointer; }
+  select.form-input option { background: #1a1a1a; color: var(--white); }
 
-        .attachment-section {
-            background: #1a1a1a;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .whatsapp-btn {
-            background: #25d366;
-            color: white;
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .warning-text {
-            font-size: 0.75rem;
-            color: #ccc;
-            margin-top: 5px;
-            line-height: 1.4;
-        }
-
-        .hidden { display: none; }
-    </style>
+  /* Hidden sections */
+  .pessoa-section { display: none; }
+  .pessoa-section.active { display: block; }
+</style>
 </head>
 <body>
 
-<div id="countdown-bar">
-    <span id="urgency-msg">RESTAM 2 VAGAS</span> | EXPIRA EM: <span id="timer">05:00</span>
+<!-- HEADER -->
+<div class="header">
+  <div class="header-tag">✦ Cadastro Exclusivo ✦</div>
+  <h1>Inicie seu <span>Serviço</span><br>Agora</h1>
 </div>
 
-<div class="container">
-    <h2>Início de Consultoria</h2>
+<!-- COUNTDOWN -->
+<div class="countdown-wrapper">
+  <div class="vagas-badge">
+    <span class="dot"></span>
+    Vagas Limitadas
+  </div>
+  <div class="countdown-msg" id="vagas-msg">⚡ Restam apenas 2 vagas disponíveis!</div>
+  <div class="countdown-timer">
+    <div class="timer-block">
+      <div class="num" id="timer-h">00</div>
+      <div class="label">Horas</div>
+    </div>
+    <div class="timer-sep">:</div>
+    <div class="timer-block">
+      <div class="num" id="timer-m">15</div>
+      <div class="label">Min</div>
+    </div>
+    <div class="timer-sep">:</div>
+    <div class="timer-block">
+      <div class="num" id="timer-s">00</div>
+      <div class="label">Seg</div>
+    </div>
+  </div>
+</div>
 
-    <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem;">Selecione o tipo de inscrição:</p>
-    
-    <div class="type-selector">
-        <button class="type-btn active" onclick="toggleForm('PF')">Pessoa Física</button>
-        <button class="type-btn" onclick="toggleForm('PJ')">Pessoa Jurídica</button>
+<!-- MAIN -->
+<div class="container">
+
+  <!-- TIPO PESSOA -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon">👤</div>
+      Tipo de Cadastro
+    </div>
+    <div class="tipo-selector">
+      <button class="tipo-btn active" onclick="setTipo('fisica')" id="btn-fisica">
+        <span class="tipo-icon">🪪</span>
+        Pessoa Física
+      </button>
+      <button class="tipo-btn" onclick="setTipo('juridica')" id="btn-juridica">
+        <span class="tipo-icon">🏢</span>
+        Pessoa Jurídica
+      </button>
     </div>
 
-    <form id="mainForm">
-        <div id="fields-PF">
-            <div class="form-group">
-                <label>Nome Completo</label>
-                <input type="text" id="nome_pf" placeholder="Digite seu nome">
-            </div>
-            <div class="form-group">
-                <label>CPF</label>
-                <input type="text" id="cpf_pf" placeholder="000.000.000-00">
-            </div>
-            <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" id="email_pf" placeholder="seu@email.com">
-            </div>
-            <div class="form-group">
-                <label>WhatsApp</label>
-                <input type="tel" id="tel_pf" placeholder="(00) 00000-0000">
-                <p class="warning-text">Atenção: informe um número válido para envio da ficha associativa para assinatura.</p>
-            </div>
-        </div>
+    <!-- FISICA -->
+    <div class="pessoa-section active" id="section-fisica">
+      <div class="form-group">
+        <label class="form-label">Nome Completo</label>
+        <input type="text" class="form-input" id="f-nome" placeholder="Seu nome completo">
+      </div>
+      <div class="form-group">
+        <label class="form-label">CPF</label>
+        <input type="text" class="form-input" id="f-cpf" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" id="f-email" placeholder="seu@email.com" inputmode="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">WhatsApp / Número</label>
+        <input type="tel" class="form-input" id="f-telefone" placeholder="(00) 00000-0000" inputmode="tel">
+        <div class="form-hint">⚠️ Atenção: informe um número de WhatsApp válido para envio da ficha associativa para assinatura.</div>
+      </div>
+    </div>
 
-        <div id="fields-PJ" class="hidden">
-            <div class="form-group">
-                <label>Razão Social</label>
-                <input type="text" id="razao_social" placeholder="Nome da empresa">
-            </div>
-            <div class="form-group">
-                <label>CNPJ</label>
-                <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
-            </div>
-            <div class="form-group">
-                <label>Nome do Sócio</label>
-                <input type="text" id="nome_socio" placeholder="Nome completo">
-            </div>
-            <div class="form-group">
-                <label>CPF do Sócio</label>
-                <input type="text" id="cpf_socio" placeholder="000.000.000-00">
-            </div>
-            <div class="form-group">
-                <label>E-mail</label>
-                <input type="email" id="email_pj" placeholder="empresa@email.com">
-            </div>
-            <div class="form-group">
-                <label>Celular (WhatsApp)</label>
-                <input type="tel" id="tel_pj" placeholder="(00) 00000-0000">
-                <p class="warning-text">Atenção: informe um número válido para envio da ficha associativa para assinatura.</p>
-            </div>
-        </div>
+    <!-- JURIDICA -->
+    <div class="pessoa-section" id="section-juridica">
+      <div class="form-group">
+        <label class="form-label">Razão Social</label>
+        <input type="text" class="form-input" id="j-razao" placeholder="Nome da empresa">
+      </div>
+      <div class="form-group">
+        <label class="form-label">CNPJ</label>
+        <input type="text" class="form-input" id="j-cnpj" placeholder="00.000.000/0000-00" maxlength="18" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Nome do Sócio</label>
+        <input type="text" class="form-input" id="j-socio" placeholder="Nome completo do sócio">
+      </div>
+      <div class="form-group">
+        <label class="form-label">CPF do Sócio</label>
+        <input type="text" class="form-input" id="j-cpf-socio" placeholder="000.000.000-00" maxlength="14" inputmode="numeric">
+      </div>
+      <div class="form-group">
+        <label class="form-label">E-mail</label>
+        <input type="email" class="form-input" id="j-email" placeholder="contato@empresa.com" inputmode="email">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Celular / WhatsApp</label>
+        <input type="tel" class="form-input" id="j-telefone" placeholder="(00) 00000-0000" inputmode="tel">
+        <div class="form-hint">⚠️ Atenção: informe um número de WhatsApp válido para envio da ficha associativa para assinatura.</div>
+      </div>
+    </div>
+  </div>
 
-        <div class="pix-box">
-            <p style="color: var(--gold); font-weight: bold;">PAGAMENTO VIA PIX</p>
-            <span class="pix-key" id="pixKey">SUA-CHAVE-PIX-AQUI-123456</span>
-            <button type="button" class="btn-copy" onclick="copyPix()">COPIAR CHAVE PIX</button>
-        </div>
+  <!-- COMPROVANTE -->
+  <div class="card">
+    <div class="card-title">
+      <div class="icon">📎</div>
+      Comprovante de Pagamento
+    </div>
+    <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
+      <input type="file" id="file-input" accept="image/*,.pdf" onchange="handleFile(event)">
+      <div class="upload-icon">📂</div>
+      <div class="upload-text">Toque para anexar o comprovante</div>
+      <div class="upload-subtext">JPG, PNG ou PDF • Máx. 10MB</div>
+    </div>
+    <div class="upload-preview" id="upload-preview">
+      📄 <span id="file-name">arquivo.jpg</span>
+    </div>
+  </div>
 
-        <div class="attachment-section">
-            <label>Anexar Comprovante de Pagamento</label>
-            <input type="file" id="comprovante" accept="image/*,.pdf">
-            <p class="warning-text">Selecione o arquivo antes de clicar no botão abaixo.</p>
-        </div>
+  <!-- PIX -->
+  <div class="pix-card">
+    <div class="pix-label">✦ Pagamento</div>
+    <div class="pix-title">Chave Pix</div>
+    <div class="pix-key-box">
+      <div class="pix-key-label">Chave Pix — CPF / CNPJ / Email / Aleatória</div>
+      <!-- ✏️ SUBSTITUA ABAIXO PELA SUA CHAVE PIX REAL -->
+      <div class="pix-key-value" id="pix-key">64.856.344/0001-80</div>
+    </div>
+    <button class="btn-copy" onclick="copyPix()">
+      <span id="copy-icon">📋</span>
+      <span id="copy-text">Copiar Chave Pix</span>
+    </button>
+  </div>
 
-        <button type="button" class="whatsapp-btn" onclick="sendWhatsApp()">
-            INICIAR SERVIÇO AGORA
-        </button>
-    </form>
+  <!-- WHATSAPP -->
+  <div class="divider">Enviar cadastro</div>
+  <div class="card" style="padding:16px 20px;">
+    <div class="card-title" style="margin-bottom:12px;">
+      <div class="icon">💬</div>
+      Enviar pelo WhatsApp
+    </div>
+    <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">
+      Ao clicar, você será redirecionado ao WhatsApp com todas as suas informações preenchidas. Anexe também o comprovante na conversa.
+    </p>
+    <a href="#" class="btn-whatsapp" id="btn-whatsapp" onclick="enviarWhatsapp(event)">
+      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      <span>
+        Enviar Dados via WhatsApp
+        <span class="btn-whatsapp-sub">Clique e finalize o envio</span>
+      </span>
+    </a>
+  </div>
+
+  <div class="ornament">✦ ◈ ✦</div>
 </div>
 
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Chave Pix copiada!</div>
+
 <script>
-    let currentType = 'PF';
+  // ═══════════════════════════════════════════════
+  // ✏️  CONFIGURAÇÕES — EDITE AQUI
+  // ═══════════════════════════════════════════════
+  const WHATSAPP_NUMBER = "+5577998227790"; // Ex: 5511999999999 (com DDI+DDD)
+  const PIX_KEY = "64.856.344/0001-80"; // Sua chave Pix real
+  const COUNTDOWN_MINUTES = 15; // Tempo em minutos
+  // ═══════════════════════════════════════════════
 
-    // Timer de Contagem Regressiva
-    function startTimer(duration, display) {
-        let timer = duration, minutes, seconds;
-        let interval = setInterval(function () {
-            minutes = parseInt(timer / 60, 10);
-            seconds = parseInt(timer % 60, 10);
-            minutes = minutes < 10 ? "0" + minutes : minutes;
-            seconds = seconds < 10 ? "0" + seconds : seconds;
-            display.textContent = minutes + ":" + seconds;
+  document.getElementById('pix-key').textContent = PIX_KEY;
 
-            if (--timer < 0) {
-                clearInterval(interval);
-                document.getElementById('urgency-msg').textContent = "CORRA, POIS RESTA UMA VAGA APENAS.";
-                display.textContent = "00:00";
-            }
-        }, 1000);
+  let tipoAtual = 'fisica';
+  let arquivoAnexado = null;
+  let countdownExpired = false;
+
+  // TIPO
+  function setTipo(tipo) {
+    tipoAtual = tipo;
+    document.getElementById('section-fisica').classList.toggle('active', tipo === 'fisica');
+    document.getElementById('section-juridica').classList.toggle('active', tipo === 'juridica');
+    document.getElementById('btn-fisica').classList.toggle('active', tipo === 'fisica');
+    document.getElementById('btn-juridica').classList.toggle('active', tipo === 'juridica');
+  }
+
+  // CPF MASK
+  document.querySelectorAll('#f-cpf, #j-cpf-socio').forEach(el => {
+    el.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g,'');
+      v = v.replace(/(\d{3})(\d)/, '$1.$2');
+      v = v.replace(/(\d{3})(\d)/, '$1.$2');
+      v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      this.value = v;
+    });
+  });
+
+  // CNPJ MASK
+  const cnpjEl = document.getElementById('j-cnpj');
+  if (cnpjEl) {
+    cnpjEl.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g,'');
+      v = v.replace(/(\d{2})(\d)/, '$1.$2');
+      v = v.replace(/(\d{3})(\d)/, '$1.$2');
+      v = v.replace(/(\d{3})(\d)/, '$1/$2');
+      v = v.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
+      this.value = v;
+    });
+  }
+
+  // PHONE MASK
+  document.querySelectorAll('#f-telefone, #j-telefone').forEach(el => {
+    el.addEventListener('input', function() {
+      let v = this.value.replace(/\D/g,'');
+      if(v.length <= 10) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+      else v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+      this.value = v;
+    });
+  });
+
+  // FILE UPLOAD
+  function handleFile(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    arquivoAnexado = file;
+    const preview = document.getElementById('upload-preview');
+    document.getElementById('file-name').textContent = file.name;
+    preview.style.display = 'flex';
+    document.querySelector('.upload-text').textContent = '✓ Comprovante anexado';
+    document.querySelector('.upload-subtext').textContent = 'Toque para trocar o arquivo';
+  }
+
+  // DRAG OVER
+  const uploadArea = document.getElementById('upload-area');
+  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+  uploadArea.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadArea.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      arquivoAnexado = file;
+      document.getElementById('file-name').textContent = file.name;
+      document.getElementById('upload-preview').style.display = 'flex';
+      document.querySelector('.upload-text').textContent = '✓ Comprovante anexado';
+    }
+  });
+
+  // COPY PIX
+  function copyPix() {
+    navigator.clipboard.writeText(PIX_KEY).then(() => {
+      document.getElementById('copy-icon').textContent = '✓';
+      document.getElementById('copy-text').textContent = 'Copiado com Sucesso!';
+      showToast('✓ Chave Pix copiada!');
+      setTimeout(() => {
+        document.getElementById('copy-icon').textContent = '📋';
+        document.getElementById('copy-text').textContent = 'Copiar Chave Pix';
+      }, 2500);
+    }).catch(() => {
+      // fallback
+      const el = document.createElement('textarea');
+      el.value = PIX_KEY;
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast('✓ Chave Pix copiada!');
+    });
+  }
+
+  // TOAST
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // WHATSAPP SEND
+  function enviarWhatsapp(e) {
+    e.preventDefault();
+    let msg = '';
+
+    if (tipoAtual === 'fisica') {
+      const nome = document.getElementById('f-nome').value.trim();
+      const cpf = document.getElementById('f-cpf').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const tel = document.getElementById('f-telefone').value.trim();
+
+      if (!nome || !cpf || !email || !tel) {
+        showToast('⚠️ Preencha todos os campos!');
+        return;
+      }
+
+      msg = `*📋 NOVO CADASTRO — PESSOA FÍSICA*\n\n` +
+            `👤 *Nome:* ${nome}\n` +
+            `🪪 *CPF:* ${cpf}\n` +
+            `📧 *E-mail:* ${email}\n` +
+            `📱 *WhatsApp:* ${tel}\n\n` +
+            `💰 *Pagamento via Pix:* ${PIX_KEY}\n\n` +
+            (arquivoAnexado ? `📎 *Comprovante:* ${arquivoAnexado.name} _(em anexo)_\n\n` : '') +
+            `_Mensagem enviada pelo formulário de cadastro._`;
+    } else {
+      const razao = document.getElementById('j-razao').value.trim();
+      const cnpj = document.getElementById('j-cnpj').value.trim();
+      const socio = document.getElementById('j-socio').value.trim();
+      const cpfSocio = document.getElementById('j-cpf-socio').value.trim();
+      const email = document.getElementById('j-email').value.trim();
+      const tel = document.getElementById('j-telefone').value.trim();
+
+      if (!razao || !cnpj || !socio || !cpfSocio || !email || !tel) {
+        showToast('⚠️ Preencha todos os campos!');
+        return;
+      }
+
+      msg = `*📋 NOVO CADASTRO — PESSOA JURÍDICA*\n\n` +
+            `🏢 *Razão Social:* ${razao}\n` +
+            `🪪 *CNPJ:* ${cnpj}\n` +
+            `👤 *Nome do Sócio:* ${socio}\n` +
+            `🪪 *CPF do Sócio:* ${cpfSocio}\n` +
+            `📧 *E-mail:* ${email}\n` +
+            `📱 *WhatsApp:* ${tel}\n\n` +
+            `💰 *Pagamento via Pix:* ${PIX_KEY}\n\n` +
+            (arquivoAnexado ? `📎 *Comprovante:* ${arquivoAnexado.name} _(em anexo)_\n\n` : '') +
+            `_Mensagem enviada pelo formulário de cadastro._`;
     }
 
-    window.onload = function () {
-        startTimer(300, document.querySelector('#timer')); // 5 minutos
-    };
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    window.open(url, '_blank');
+  }
 
-    function toggleForm(type) {
-        currentType = type;
-        document.getElementById('fields-PF').classList.toggle('hidden', type !== 'PF');
-        document.getElementById('fields-PJ').classList.toggle('hidden', type !== 'PJ');
-        
-        document.querySelectorAll('.type-btn').forEach(btn => {
-            btn.classList.toggle('active', btn.textContent.includes(type === 'PF' ? 'Física' : 'Jurídica'));
-        });
+  // COUNTDOWN
+  let totalSeconds = COUNTDOWN_MINUTES * 60;
+  let expired = false;
+
+  function updateCountdown() {
+    const h = Math.floor(totalSeconds / 3600);
+    const m = Math.floor((totalSeconds % 3600) / 60);
+    const s = totalSeconds % 60;
+    document.getElementById('timer-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('timer-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('timer-s').textContent = String(s).padStart(2,'0');
+
+    if (totalSeconds <= 0) {
+      if (!expired) {
+        expired = true;
+        const msg = document.getElementById('vagas-msg');
+        msg.textContent = '🔥 CORRA, pois resta uma vaga apenas!';
+        msg.classList.add('urgent');
+        // Restart countdown
+        totalSeconds = COUNTDOWN_MINUTES * 60;
+        expired = false;
+      }
+    } else {
+      totalSeconds--;
     }
+  }
 
-    function copyPix() {
-        const key = document.getElementById('pixKey').innerText;
-        navigator.clipboard.writeText(key);
-        alert("64.856.344/0001-80");
-    }
-
-    function sendWhatsApp() {
-        const phone = "5577998227790"; // COLOQUE SEU NUMERO AQUI
-        let text = `*NOVO PEDIDO DE SERVIÇO*\n\n`;
-
-        if(currentType === 'PF') {
-            text += `*Tipo:* Pessoa Física\n`;
-            text += `*Nome:* ${document.getElementById('nome_pf').value}\n`;
-            text += `*CPF:* ${document.getElementById('cpf_pf').value}\n`;
-            text += `*Email:* ${document.getElementById('email_pf').value}\n`;
-            text += `*WhatsApp:* ${document.getElementById('tel_pf').value}\n`;
-        } else {
-            text += `*Tipo:* Pessoa Jurídica\n`;
-            text += `*Razão Social:* ${document.getElementById('razao_social').value}\n`;
-            text += `*CNPJ:* ${document.getElementById('cnpj').value}\n`;
-            text += `*Sócio:* ${document.getElementById('nome_socio').value}\n`;
-            text += `*CPF Sócio:* ${document.getElementById('cpf_socio').value}\n`;
-            text += `*Email:* ${document.getElementById('email_pj').value}\n`;
-            text += `*WhatsApp:* ${document.getElementById('tel_pj').value}\n`;
-        }
-
-        text += `\n_Estou enviando o comprovante em anexo._`;
-        
-        const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
-        window.open(url, '_blank');
-    }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
 </script>
-
 </body>
 </html>
