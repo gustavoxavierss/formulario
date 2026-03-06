@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Início de Serviço - Premium</title>
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --black: #0a0a0a;
+            --dark-grey: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+        body { background-color: var(--black); color: var(--white); padding-bottom: 50px; }
+
+        /* Barra de Urgência */
+        #countdown-bar {
+            background: linear-gradient(90deg, #b8860b, var(--gold));
+            color: black;
+            text-align: center;
+            padding: 12px;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-size: 0.9rem;
+        }
+
+        .container { max-width: 500px; margin: 20px auto; padding: 20px; }
+
+        h2 { color: var(--gold); text-align: center; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px; }
+
+        .form-group { margin-bottom: 15px; }
+
+        label { display: block; margin-bottom: 5px; color: var(--gold); font-size: 0.85rem; }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: var(--dark-grey);
+            border: 1px solid #333;
+            color: white;
+            border-radius: 8px;
+            outline: none;
+        }
+
+        input:focus { border-color: var(--gold); }
+
+        .type-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .type-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--gold);
+            background: transparent;
+            color: var(--gold);
+            cursor: pointer;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .type-btn.active {
+            background: var(--gold);
+            color: black;
+        }
+
+        /* Seção PIX */
+        .pix-box {
+            background: var(--dark-grey);
+            border: 2px dashed var(--gold);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .pix-key {
+            background: #000;
+            padding: 10px;
+            display: block;
+            margin: 10px 0;
+            word-break: break-all;
+            font-size: 0.8rem;
+            border: 1px solid #444;
+        }
+
+        .btn-copy {
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .attachment-section {
+            background: #1a1a1a;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .whatsapp-btn {
+            background: #25d366;
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .warning-text {
+            font-size: 0.75rem;
+            color: #ccc;
+            margin-top: 5px;
+            line-height: 1.4;
+        }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<div id="countdown-bar">
+    <span id="urgency-msg">RESTAM 2 VAGAS</span> | EXPIRA EM: <span id="timer">05:00</span>
+</div>
+
+<div class="container">
+    <h2>Início de Consultoria</h2>
+
+    <p style="text-align: center; margin-bottom: 20px; font-size: 0.9rem;">Selecione o tipo de inscrição:</p>
+    
+    <div class="type-selector">
+        <button class="type-btn active" onclick="toggleForm('PF')">Pessoa Física</button>
+        <button class="type-btn" onclick="toggleForm('PJ')">Pessoa Jurídica</button>
+    </div>
+
+    <form id="mainForm">
+        <div id="fields-PF">
+            <div class="form-group">
+                <label>Nome Completo</label>
+                <input type="text" id="nome_pf" placeholder="Digite seu nome">
+            </div>
+            <div class="form-group">
+                <label>CPF</label>
+                <input type="text" id="cpf_pf" placeholder="000.000.000-00">
+            </div>
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" id="email_pf" placeholder="seu@email.com">
+            </div>
+            <div class="form-group">
+                <label>WhatsApp</label>
+                <input type="tel" id="tel_pf" placeholder="(00) 00000-0000">
+                <p class="warning-text">Atenção: informe um número válido para envio da ficha associativa para assinatura.</p>
+            </div>
+        </div>
+
+        <div id="fields-PJ" class="hidden">
+            <div class="form-group">
+                <label>Razão Social</label>
+                <input type="text" id="razao_social" placeholder="Nome da empresa">
+            </div>
+            <div class="form-group">
+                <label>CNPJ</label>
+                <input type="text" id="cnpj" placeholder="00.000.000/0000-00">
+            </div>
+            <div class="form-group">
+                <label>Nome do Sócio</label>
+                <input type="text" id="nome_socio" placeholder="Nome completo">
+            </div>
+            <div class="form-group">
+                <label>CPF do Sócio</label>
+                <input type="text" id="cpf_socio" placeholder="000.000.000-00">
+            </div>
+            <div class="form-group">
+                <label>E-mail</label>
+                <input type="email" id="email_pj" placeholder="empresa@email.com">
+            </div>
+            <div class="form-group">
+                <label>Celular (WhatsApp)</label>
+                <input type="tel" id="tel_pj" placeholder="(00) 00000-0000">
+                <p class="warning-text">Atenção: informe um número válido para envio da ficha associativa para assinatura.</p>
+            </div>
+        </div>
+
+        <div class="pix-box">
+            <p style="color: var(--gold); font-weight: bold;">PAGAMENTO VIA PIX</p>
+            <span class="pix-key" id="pixKey">SUA-CHAVE-PIX-AQUI-123456</span>
+            <button type="button" class="btn-copy" onclick="copyPix()">COPIAR CHAVE PIX</button>
+        </div>
+
+        <div class="attachment-section">
+            <label>Anexar Comprovante de Pagamento</label>
+            <input type="file" id="comprovante" accept="image/*,.pdf">
+            <p class="warning-text">Selecione o arquivo antes de clicar no botão abaixo.</p>
+        </div>
+
+        <button type="button" class="whatsapp-btn" onclick="sendWhatsApp()">
+            INICIAR SERVIÇO AGORA
+        </button>
+    </form>
+</div>
+
+<script>
+    let currentType = 'PF';
+
+    // Timer de Contagem Regressiva
+    function startTimer(duration, display) {
+        let timer = duration, minutes, seconds;
+        let interval = setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + ":" + seconds;
+
+            if (--timer < 0) {
+                clearInterval(interval);
+                document.getElementById('urgency-msg').textContent = "CORRA, POIS RESTA UMA VAGA APENAS.";
+                display.textContent = "00:00";
+            }
+        }, 1000);
+    }
+
+    window.onload = function () {
+        startTimer(300, document.querySelector('#timer')); // 5 minutos
+    };
+
+    function toggleForm(type) {
+        currentType = type;
+        document.getElementById('fields-PF').classList.toggle('hidden', type !== 'PF');
+        document.getElementById('fields-PJ').classList.toggle('hidden', type !== 'PJ');
+        
+        document.querySelectorAll('.type-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.textContent.includes(type === 'PF' ? 'Física' : 'Jurídica'));
+        });
+    }
+
+    function copyPix() {
+        const key = document.getElementById('pixKey').innerText;
+        navigator.clipboard.writeText(key);
+        alert("64.856.344/0001-80");
+    }
+
+    function sendWhatsApp() {
+        const phone = "5577998227790"; // COLOQUE SEU NUMERO AQUI
+        let text = `*NOVO PEDIDO DE SERVIÇO*\n\n`;
+
+        if(currentType === 'PF') {
+            text += `*Tipo:* Pessoa Física\n`;
+            text += `*Nome:* ${document.getElementById('nome_pf').value}\n`;
+            text += `*CPF:* ${document.getElementById('cpf_pf').value}\n`;
+            text += `*Email:* ${document.getElementById('email_pf').value}\n`;
+            text += `*WhatsApp:* ${document.getElementById('tel_pf').value}\n`;
+        } else {
+            text += `*Tipo:* Pessoa Jurídica\n`;
+            text += `*Razão Social:* ${document.getElementById('razao_social').value}\n`;
+            text += `*CNPJ:* ${document.getElementById('cnpj').value}\n`;
+            text += `*Sócio:* ${document.getElementById('nome_socio').value}\n`;
+            text += `*CPF Sócio:* ${document.getElementById('cpf_socio').value}\n`;
+            text += `*Email:* ${document.getElementById('email_pj').value}\n`;
+            text += `*WhatsApp:* ${document.getElementById('tel_pj').value}\n`;
+        }
+
+        text += `\n_Estou enviando o comprovante em anexo._`;
+        
+        const url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+        window.open(url, '_blank');
+    }
+</script>
+
+</body>
+</html>
