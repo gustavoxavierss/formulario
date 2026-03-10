@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Formulário de Cadastro</title>
+<title>Cadastro Exclusivo - Ultra Academia</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -71,13 +71,6 @@
     position: relative;
     overflow: hidden;
   }
-  .countdown-wrapper::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
   .vagas-badge {
     display: inline-flex;
     align-items: center;
@@ -124,26 +117,8 @@
     padding: 8px 12px;
     min-width: 56px;
   }
-  .timer-block .num {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--gold);
-    line-height: 1;
-  }
-  .timer-block .label {
-    font-size: 8px;
-    letter-spacing: 1.5px;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    margin-top: 3px;
-  }
-  .timer-sep {
-    font-size: 24px;
-    color: var(--gold-dark);
-    align-self: center;
-    padding-bottom: 12px;
-  }
+  .timer-block .num { font-size: 28px; font-weight: 700; color: var(--gold); line-height: 1; font-family: 'Cormorant Garamond', serif; }
+  .timer-block .label { font-size: 8px; color: var(--text-muted); text-transform: uppercase; margin-top: 3px; }
 
   /* MAIN CONTAINER */
   .container { padding: 0 16px 40px; max-width: 600px; margin: 0 auto; }
@@ -155,7 +130,6 @@
     border-radius: 16px;
     padding: 24px 20px;
     margin-bottom: 16px;
-    position: relative;
   }
   .card-title {
     font-family: 'Cormorant Garamond', serif;
@@ -166,14 +140,6 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
-  }
-  .card-title .icon {
-    width: 32px; height: 32px;
-    background: rgba(201,168,76,0.1);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
   }
 
   /* TIPO SELECTOR */
@@ -189,20 +155,14 @@
     border: 1.5px solid rgba(201,168,76,0.25);
     background: var(--black-input);
     color: var(--text-muted);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
     cursor: pointer;
-    text-align: center;
     transition: all 0.3s;
-    letter-spacing: 0.5px;
   }
   .tipo-btn.active {
     border-color: var(--gold);
     background: rgba(201,168,76,0.1);
     color: var(--gold-light);
   }
-  .tipo-btn .tipo-icon { font-size: 20px; display: block; margin-bottom: 4px; }
 
   /* FORM */
   .form-group { margin-bottom: 16px; }
@@ -222,132 +182,17 @@
     border-radius: 10px;
     padding: 13px 15px;
     color: var(--white);
-    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     outline: none;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    -webkit-appearance: none;
-  }
-  .form-input::placeholder { color: #444; }
-  .form-input:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
   }
   .form-hint {
     font-size: 10px;
     color: var(--gold-dark);
     margin-top: 6px;
-    line-height: 1.5;
     padding: 8px 10px;
     background: rgba(201,168,76,0.05);
     border-left: 2px solid var(--gold-dark);
-    border-radius: 0 6px 6px 0;
   }
-
-  /* FILE UPLOAD */
-  .upload-area {
-    border: 1.5px dashed rgba(201,168,76,0.3);
-    border-radius: 12px;
-    padding: 24px 16px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s;
-    background: rgba(201,168,76,0.02);
-    position: relative;
-  }
-  .upload-area:hover, .upload-area.drag-over {
-    border-color: var(--gold);
-    background: rgba(201,168,76,0.06);
-  }
-  .upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
-  .upload-icon { font-size: 32px; margin-bottom: 8px; }
-  .upload-text {
-    font-size: 13px;
-    color: var(--white-soft);
-    margin-bottom: 4px;
-    font-weight: 500;
-  }
-  .upload-subtext { font-size: 11px; color: var(--text-muted); }
-  .upload-preview {
-    display: none;
-    margin-top: 12px;
-    padding: 10px 14px;
-    background: rgba(201,168,76,0.08);
-    border: 1px solid rgba(201,168,76,0.3);
-    border-radius: 8px;
-    font-size: 12px;
-    color: var(--gold-light);
-    text-align: left;
-    gap: 8px;
-    align-items: center;
-  }
-
-  /* PIX */
-  .pix-card {
-    background: linear-gradient(135deg, #1a1300, #0f0900);
-    border: 1px solid var(--gold-dark);
-    border-radius: 16px;
-    padding: 24px 20px;
-    margin-bottom: 16px;
-    position: relative;
-    overflow: hidden;
-  }
-  .pix-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  }
-  .pix-label {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 6px;
-    font-weight: 600;
-  }
-  .pix-title {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 22px;
-    color: var(--white);
-    margin-bottom: 16px;
-  }
-  .pix-key-box {
-    background: rgba(0,0,0,0.5);
-    border: 1px solid rgba(201,168,76,0.25);
-    border-radius: 10px;
-    padding: 14px;
-    margin-bottom: 12px;
-  }
-  .pix-key-label { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; margin-bottom: 6px; text-transform: uppercase; }
-  .pix-key-value {
-    font-size: 15px;
-    color: var(--gold-light);
-    word-break: break-all;
-    font-weight: 500;
-  }
-  .btn-copy {
-    width: 100%;
-    padding: 14px;
-    background: linear-gradient(135deg, var(--gold-dark), var(--gold));
-    border: none;
-    border-radius: 10px;
-    color: var(--black);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: all 0.3s;
-  }
-  .btn-copy:hover { filter: brightness(1.1); transform: translateY(-1px); }
-  .btn-copy:active { transform: translateY(0); }
 
   /* WHATSAPP BUTTON */
   .btn-whatsapp {
@@ -360,7 +205,6 @@
     font-family: 'Montserrat', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.5px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -368,35 +212,15 @@
     gap: 12px;
     transition: all 0.3s;
     box-shadow: 0 8px 32px rgba(37,211,102,0.2);
-    margin-top: 8px;
     text-decoration: none;
   }
-  .btn-whatsapp:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 40px rgba(37,211,102,0.3);
-  }
-  .btn-whatsapp svg { width: 24px; height: 24px; flex-shrink: 0; }
-  .btn-whatsapp-sub { font-size: 10px; font-weight: 400; opacity: 0.85; display: block; letter-spacing: 0.5px; }
+  .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(37,211,102,0.3); }
+  .btn-whatsapp svg { width: 24px; height: 24px; }
+  .btn-whatsapp-sub { font-size: 10px; font-weight: 400; opacity: 0.85; display: block; }
 
-  /* DIVIDER */
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin: 20px 0;
-    color: var(--text-muted);
-    font-size: 10px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-  }
-  .divider::before, .divider::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: rgba(201,168,76,0.15);
-  }
-
-  /* TOAST */
+  .pessoa-section { display: none; }
+  .pessoa-section.active { display: block; }
+  
   .toast {
     position: fixed;
     bottom: 30px;
@@ -408,84 +232,38 @@
     border-radius: 30px;
     font-size: 13px;
     font-weight: 600;
-    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition: transform 0.4s;
     z-index: 999;
-    white-space: nowrap;
   }
   .toast.show { transform: translateX(-50%) translateY(0); }
-
-  /* FOOTER ORNAMENT */
-  .ornament {
-    text-align: center;
-    padding: 10px 0 20px;
-    color: rgba(201,168,76,0.2);
-    font-size: 22px;
-    letter-spacing: 12px;
-  }
-
-  /* SELECT styled */
-  select.form-input { cursor: pointer; }
-  select.form-input option { background: #1a1a1a; color: var(--white); }
-
-  /* Hidden sections */
-  .pessoa-section { display: none; }
-  .pessoa-section.active { display: block; }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <div class="header">
   <div class="header-tag">✦ Cadastro Exclusivo ✦</div>
   <h1>Inicie seu <span>Serviço</span><br>Agora</h1>
 </div>
 
-<!-- COUNTDOWN -->
 <div class="countdown-wrapper">
-  <div class="vagas-badge">
-    <span class="dot"></span>
-    Vagas Limitadas
-  </div>
+  <div class="vagas-badge"><span class="dot"></span> Vagas Limitadas</div>
   <div class="countdown-msg" id="vagas-msg">⚡ Restam apenas 2 vagas disponíveis!</div>
   <div class="countdown-timer">
-    <div class="timer-block">
-      <div class="num" id="timer-h">00</div>
-      <div class="label">Horas</div>
-    </div>
-    <div class="timer-sep">:</div>
-    <div class="timer-block">
-      <div class="num" id="timer-m">15</div>
-      <div class="label">Min</div>
-    </div>
-    <div class="timer-sep">:</div>
-    <div class="timer-block">
-      <div class="num" id="timer-s">00</div>
-      <div class="label">Seg</div>
-    </div>
+    <div class="timer-block"><div class="num" id="timer-m">15</div><div class="label">Min</div></div>
+    <div style="font-size:24px; color:var(--gold-dark);">:</div>
+    <div class="timer-block"><div class="num" id="timer-s">00</div><div class="label">Seg</div></div>
   </div>
 </div>
 
-<!-- MAIN -->
 <div class="container">
-
-  <!-- TIPO PESSOA -->
   <div class="card">
-    <div class="card-title">
-      <div class="icon">👤</div>
-      Tipo de Cadastro
-    </div>
+    <div class="card-title">👤 Informações de Cadastro</div>
+    
     <div class="tipo-selector">
-      <button class="tipo-btn active" onclick="setTipo('fisica')" id="btn-fisica">
-        <span class="tipo-icon">🪪</span>
-        Pessoa Física
-      </button>
-      <button class="tipo-btn" onclick="setTipo('juridica')" id="btn-juridica">
-        <span class="tipo-icon">🏢</span>
-        Pessoa Jurídica
-      </button>
+      <button class="tipo-btn active" onclick="setTipo('fisica')" id="btn-fisica">Pessoa Física</button>
+      <button class="tipo-btn" onclick="setTipo('juridica')" id="btn-juridica">Pessoa Jurídica</button>
     </div>
 
-    <!-- FISICA -->
     <div class="pessoa-section active" id="section-fisica">
       <div class="form-group">
         <label class="form-label">Nome Completo</label>
@@ -497,16 +275,15 @@
       </div>
       <div class="form-group">
         <label class="form-label">E-mail</label>
-        <input type="email" class="form-input" id="f-email" placeholder="seu@email.com" inputmode="email">
+        <input type="email" class="form-input" id="f-email" placeholder="seu@email.com">
       </div>
       <div class="form-group">
-        <label class="form-label">WhatsApp / Número</label>
-        <input type="tel" class="form-input" id="f-telefone" placeholder="(00) 00000-0000" inputmode="tel">
-        <div class="form-hint">⚠️ Atenção: informe um número de WhatsApp válido para envio da ficha associativa para assinatura.</div>
+        <label class="form-label">WhatsApp</label>
+        <input type="tel" class="form-input" id="f-telefone" placeholder="(00) 00000-0000">
+        <div class="form-hint">⚠️ Informe um WhatsApp válido para receber sua ficha associativa.</div>
       </div>
     </div>
 
-    <!-- JURIDICA -->
     <div class="pessoa-section" id="section-juridica">
       <div class="form-group">
         <label class="form-label">Razão Social</label>
@@ -518,7 +295,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">Nome do Sócio</label>
-        <input type="text" class="form-input" id="j-socio" placeholder="Nome completo do sócio">
+        <input type="text" class="form-input" id="j-socio" placeholder="Nome do sócio">
       </div>
       <div class="form-group">
         <label class="form-label">CPF do Sócio</label>
@@ -526,75 +303,33 @@
       </div>
       <div class="form-group">
         <label class="form-label">E-mail</label>
-        <input type="email" class="form-input" id="j-email" placeholder="contato@empresa.com" inputmode="email">
+        <input type="email" class="form-input" id="j-email" placeholder="contato@empresa.com">
       </div>
       <div class="form-group">
         <label class="form-label">Celular / WhatsApp</label>
-        <input type="tel" class="form-input" id="j-telefone" placeholder="(00) 00000-0000" inputmode="tel">
-        <div class="form-hint">⚠️ Atenção: informe um número de WhatsApp válido para envio da ficha associativa para assinatura.</div>
+        <input type="tel" class="form-input" id="j-telefone" placeholder="(00) 00000-0000">
+        <div class="form-hint">⚠️ Informe um WhatsApp válido para receber sua ficha associativa.</div>
       </div>
     </div>
   </div>
 
-
-  <!-- PIX -->
-  <div class="pix-card">
-    <div class="pix-label">✦ Pagamento</div>
-    <div class="pix-title">DE R$1299,99 POR APENAS R$299,99</div>
-    <div class="pix-key-box">
-      <div class="pix-key-label">Chave Pix — CNPJ</div>
-      <!-- ✏️ SUBSTITUA ABAIXO PELA SUA CHAVE PIX REAL -->
-      <div class="pix-key-value" id="pix-key">64.856.344/0001-80</div>
-    </div>
-    <button class="btn-copy" onclick="copyPix()">
-      <span id="copy-icon">📋</span>
-      <span id="copy-text">Copiar Chave Pix</span>
-    </button>
-  </div>
-
-  <!-- WHATSAPP -->
-  <div class="divider">Enviar cadastro</div>
-  <div class="card" style="padding:16px 20px;">
-    <div class="card-title" style="margin-bottom:12px;">
-      <div class="icon">💬</div>
-      Enviar pelo WhatsApp
-    </div>
-    <p style="font-size:12px;color:var(--text-muted);margin-bottom:16px;line-height:1.6;">
-      Ao clicar, você será redirecionado ao WhatsApp com todas as suas informações preenchidas. Anexe também o comprovante na conversa.
-    </p>
-    <a href="#" class="btn-whatsapp" id="btn-whatsapp" onclick="enviarWhatsapp(event)">
-      <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-      </svg>
-      <span>
-        Enviar Dados via WhatsApp
-        <span class="btn-whatsapp-sub">Clique e finalize o envio</span>
-      </span>
-    </a>
-  </div>
-
-  <div class="ornament">✦ ◈ ✦</div>
+  <a href="#" class="btn-whatsapp" onclick="enviarWhatsapp(event)">
+    <svg viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span>
+      Enviar Dados via WhatsApp
+      <span class="btn-whatsapp-sub">Finalize seu cadastro aqui</span>
+    </span>
+  </a>
 </div>
 
-<!-- TOAST -->
-<div class="toast" id="toast">✓ Chave Pix copiada!</div>
+<div class="toast" id="toast">⚠️ Preencha todos os campos!</div>
 
 <script>
-  // ═══════════════════════════════════════════════
-  // ✏️  CONFIGURAÇÕES — EDITE AQUI
-  // ═══════════════════════════════════════════════
-  const WHATSAPP_NUMBER = "+5577998227790"; // Ex: 5511999999999 (com DDI+DDD)
-  const PIX_KEY = "64.856.344/0001-80"; // Sua chave Pix real
-  const COUNTDOWN_MINUTES = 15; // Tempo em minutos
-  // ═══════════════════════════════════════════════
-
-  document.getElementById('pix-key').textContent = PIX_KEY;
-
+  const WHATSAPP_NUMBER = "5577998227790"; 
   let tipoAtual = 'fisica';
-  let arquivoAnexado = null;
-  let countdownExpired = false;
 
-  // TIPO
   function setTipo(tipo) {
     tipoAtual = tipo;
     document.getElementById('section-fisica').classList.toggle('active', tipo === 'fisica');
@@ -603,181 +338,49 @@
     document.getElementById('btn-juridica').classList.toggle('active', tipo === 'juridica');
   }
 
-  // CPF MASK
-  document.querySelectorAll('#f-cpf, #j-cpf-socio').forEach(el => {
-    el.addEventListener('input', function() {
-      let v = this.value.replace(/\D/g,'');
-      v = v.replace(/(\d{3})(\d)/, '$1.$2');
-      v = v.replace(/(\d{3})(\d)/, '$1.$2');
-      v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-      this.value = v;
-    });
-  });
+  // MASCARAS SIMPLIFICADAS
+  const mask = (el, fn) => el.addEventListener('input', e => e.target.value = fn(e.target.value));
+  
+  document.querySelectorAll('#f-cpf, #j-cpf-socio').forEach(el => mask(el, v => v.replace(/\D/g,'').replace(/(\d{3})(\d{3})(\d{3})(\d{2})/g, "$1.$2.$3-$4").substring(0,14)));
+  mask(document.getElementById('j-cnpj'), v => v.replace(/\D/g,'').replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/g, "$1.$2.$3/$4-$5").substring(0,18));
+  document.querySelectorAll('#f-telefone, #j-telefone').forEach(el => mask(el, v => v.replace(/\D/g,'').replace(/(\d{2})(\d{5})(\d{4})/g, "($1) $2-$3").substring(0,15)));
 
-  // CNPJ MASK
-  const cnpjEl = document.getElementById('j-cnpj');
-  if (cnpjEl) {
-    cnpjEl.addEventListener('input', function() {
-      let v = this.value.replace(/\D/g,'');
-      v = v.replace(/(\d{2})(\d)/, '$1.$2');
-      v = v.replace(/(\d{3})(\d)/, '$1.$2');
-      v = v.replace(/(\d{3})(\d)/, '$1/$2');
-      v = v.replace(/(\d{4})(\d{1,2})$/, '$1-$2');
-      this.value = v;
-    });
-  }
-
-  // PHONE MASK
-  document.querySelectorAll('#f-telefone, #j-telefone').forEach(el => {
-    el.addEventListener('input', function() {
-      let v = this.value.replace(/\D/g,'');
-      if(v.length <= 10) v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-      else v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
-      this.value = v;
-    });
-  });
-
-  // FILE UPLOAD
-  function handleFile(e) {
-    const file = e.target.files[0];
-    if (!file) return;
-    arquivoAnexado = file;
-    const preview = document.getElementById('upload-preview');
-    document.getElementById('file-name').textContent = file.name;
-    preview.style.display = 'flex';
-    document.querySelector('.upload-text').textContent = '✓ Comprovante anexado';
-    document.querySelector('.upload-subtext').textContent = 'Toque para trocar o arquivo';
-  }
-
-  // DRAG OVER
-  const uploadArea = document.getElementById('upload-area');
-  uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
-  uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
-  uploadArea.addEventListener('drop', e => {
+  function enviarWhatsapp(e) {
     e.preventDefault();
-    uploadArea.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      arquivoAnexado = file;
-      document.getElementById('file-name').textContent = file.name;
-      document.getElementById('upload-preview').style.display = 'flex';
-      document.querySelector('.upload-text').textContent = '✓ Comprovante anexado';
-    }
-  });
+    let msg = '';
+    const getVal = id => document.getElementById(id).value.trim();
 
-  // COPY PIX
-  function copyPix() {
-    navigator.clipboard.writeText(PIX_KEY).then(() => {
-      document.getElementById('copy-icon').textContent = '✓';
-      document.getElementById('copy-text').textContent = 'Copiado com Sucesso!';
-      showToast('✓ Chave Pix copiada!');
-      setTimeout(() => {
-        document.getElementById('copy-icon').textContent = '📋';
-        document.getElementById('copy-text').textContent = 'Copiar Chave Pix';
-      }, 2500);
-    }).catch(() => {
-      // fallback
-      const el = document.createElement('textarea');
-      el.value = PIX_KEY;
-      document.body.appendChild(el);
-      el.select();
-      document.execCommand('copy');
-      document.body.removeChild(el);
-      showToast('✓ Chave Pix copiada!');
-    });
+    if (tipoAtual === 'fisica') {
+      const [n, c, m, t] = [getVal('f-nome'), getVal('f-cpf'), getVal('f-email'), getVal('f-telefone')];
+      if (!n || !c || !m || !t) return showToast();
+      msg = `*📋 NOVO CADASTRO — PF*\n\n👤 *Nome:* ${n}\n🪪 *CPF:* ${c}\n📧 *E-mail:* ${m}\n📱 *WhatsApp:* ${t}`;
+    } else {
+      const [r, c, s, cs, m, t] = [getVal('j-razao'), getVal('j-cnpj'), getVal('j-socio'), getVal('j-cpf-socio'), getVal('j-email'), getVal('j-telefone')];
+      if (!r || !c || !s || !cs || !m || !t) return showToast();
+      msg = `*📋 NOVO CADASTRO — PJ*\n\n🏢 *Razão:* ${r}\n🪪 *CNPJ:* ${c}\n👤 *Sócio:* ${s}\n🪪 *CPF Sócio:* ${cs}\n📧 *E-mail:* ${m}\n📱 *WhatsApp:* ${t}`;
+    }
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
   }
 
-  // TOAST
-  function showToast(msg) {
+  function showToast() {
     const t = document.getElementById('toast');
-    t.textContent = msg;
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
 
-  // WHATSAPP SEND
-  function enviarWhatsapp(e) {
-    e.preventDefault();
-    let msg = '';
-
-    if (tipoAtual === 'fisica') {
-      const nome = document.getElementById('f-nome').value.trim();
-      const cpf = document.getElementById('f-cpf').value.trim();
-      const email = document.getElementById('f-email').value.trim();
-      const tel = document.getElementById('f-telefone').value.trim();
-
-      if (!nome || !cpf || !email || !tel) {
-        showToast('⚠️ Preencha todos os campos!');
-        return;
-      }
-
-      msg = `*📋 NOVO CADASTRO — PESSOA FÍSICA*\n\n` +
-            `👤 *Nome:* ${nome}\n` +
-            `🪪 *CPF:* ${cpf}\n` +
-            `📧 *E-mail:* ${email}\n` +
-            `📱 *WhatsApp:* ${tel}\n\n` +
-            `💰 *Pagamento via Pix:* ${PIX_KEY}\n\n` +
-            (arquivoAnexado ? `📎 *Comprovante:* ${arquivoAnexado.name} _(em anexo)_\n\n` : '') +
-            `_Mensagem enviada pelo formulário de cadastro._`;
-    } else {
-      const razao = document.getElementById('j-razao').value.trim();
-      const cnpj = document.getElementById('j-cnpj').value.trim();
-      const socio = document.getElementById('j-socio').value.trim();
-      const cpfSocio = document.getElementById('j-cpf-socio').value.trim();
-      const email = document.getElementById('j-email').value.trim();
-      const tel = document.getElementById('j-telefone').value.trim();
-
-      if (!razao || !cnpj || !socio || !cpfSocio || !email || !tel) {
-        showToast('⚠️ Preencha todos os campos!');
-        return;
-      }
-
-      msg = `*📋 NOVO CADASTRO — PESSOA JURÍDICA*\n\n` +
-            `🏢 *Razão Social:* ${razao}\n` +
-            `🪪 *CNPJ:* ${cnpj}\n` +
-            `👤 *Nome do Sócio:* ${socio}\n` +
-            `🪪 *CPF do Sócio:* ${cpfSocio}\n` +
-            `📧 *E-mail:* ${email}\n` +
-            `📱 *WhatsApp:* ${tel}\n\n` +
-            `💰 *Pagamento via Pix:* ${PIX_KEY}\n\n` +
-            (arquivoAnexado ? `📎 *Comprovante:* ${arquivoAnexado.name} _(em anexo)_\n\n` : '') +
-            `_Mensagem enviada pelo formulário de cadastro._`;
-    }
-
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-    window.open(url, '_blank');
-  }
-
   // COUNTDOWN
-  let totalSeconds = COUNTDOWN_MINUTES * 60;
-  let expired = false;
-
-  function updateCountdown() {
-    const h = Math.floor(totalSeconds / 3600);
-    const m = Math.floor((totalSeconds % 3600) / 60);
-    const s = totalSeconds % 60;
-    document.getElementById('timer-h').textContent = String(h).padStart(2,'0');
+  let time = 900;
+  setInterval(() => {
+    const m = Math.floor(time / 60);
+    const s = time % 60;
     document.getElementById('timer-m').textContent = String(m).padStart(2,'0');
     document.getElementById('timer-s').textContent = String(s).padStart(2,'0');
-
-    if (totalSeconds <= 0) {
-      if (!expired) {
-        expired = true;
-        const msg = document.getElementById('vagas-msg');
-        msg.textContent = '🔥 CORRA, pois resta uma vaga apenas!';
-        msg.classList.add('urgent');
-        // Restart countdown
-        totalSeconds = COUNTDOWN_MINUTES * 60;
-        expired = false;
-      }
-    } else {
-      totalSeconds--;
+    if (time > 0) time--; else {
+       document.getElementById('vagas-msg').textContent = '🔥 CORRA, resta uma vaga apenas!';
+       time = 900;
     }
-  }
-
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  }, 1000);
 </script>
 </body>
 </html>
-
